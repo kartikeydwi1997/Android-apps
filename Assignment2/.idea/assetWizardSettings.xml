@@ -67,6 +67,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
+                                                <entry key="color" value="090808" />
                                                 <entry key="imagePath" value="/private/var/folders/cz/mcnkm6nx7yz31m1b1z0f60b00000gn/T/ic_android_black_24dp.xml" />
                                               </map>
                                             </option>
@@ -89,8 +90,9 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="color" value="090808" />
-                                                <entry key="text" value="A1" />
+                                                <entry key="color" value="000505" />
+                                                <entry key="fontFamily" value=".SF NS" />
+                                                <entry key="text" value="A2" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -101,8 +103,9 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="color" value="090808" />
-                                                <entry key="text" value="A1" />
+                                                <entry key="color" value="000505" />
+                                                <entry key="fontFamily" value=".SF NS" />
+                                                <entry key="text" value="A2" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -113,9 +116,9 @@
                                   <option name="values">
                                     <map>
                                       <entry key="backgroundAssetType" value="COLOR" />
-                                      <entry key="backgroundColor" value="3d5fdc" />
+                                      <entry key="backgroundColor" value="dc8f3d" />
                                       <entry key="foregroundAssetType" value="TEXT" />
-                                      <entry key="outputName" value="ic_launcher_a1" />
+                                      <entry key="outputName" value="ic_launcher_a2" />
                                     </map>
                                   </option>
                                 </PersistentState>
