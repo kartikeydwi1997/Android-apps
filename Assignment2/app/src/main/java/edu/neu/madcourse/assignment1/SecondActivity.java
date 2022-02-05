@@ -58,7 +58,7 @@ public class SecondActivity extends AppCompatActivity {
     public void onConfigurationChanged(@NotNull Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
 
-        // Checks the orientation of the screen
+        // Checks the orientation of the screen and update the text for the textview.
         if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             textView.setText("Pressed:A");
 
