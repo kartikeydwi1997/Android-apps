@@ -54,14 +54,15 @@ public class SecondActivity extends AppCompatActivity {
         }
 
     }
-    @Override
-    public void onConfigurationChanged(@NotNull Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-
-        // Checks the orientation of the screen and update the text for the textview.
-        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            textView.setText("Pressed:A");
-
-        }
-    }
+//    @Override
+//    public void onConfigurationChanged(@NotNull Configuration newConfig) {
+//        super.onConfigurationChanged(newConfig);
+//
+//        // Checks the orientation of the screen and update the text for the textview.
+//        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+//            textView.setText("Pressed: -");
+//
+//        }
+//    }
+   //in androidManifest android:configChanges="orientation|screenSize"
 }
