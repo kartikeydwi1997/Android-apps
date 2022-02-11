@@ -22,4 +22,7 @@
     <style name="Theme.Assignment1.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.Assignment1.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="AppTheme">
+        <item name="coordinatorLayoutStyle">@style/Widget.Support.CoordinatorLayout</item>
+    </style>
 </resources>

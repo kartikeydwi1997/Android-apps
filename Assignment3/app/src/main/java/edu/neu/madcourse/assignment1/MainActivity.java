@@ -10,7 +10,7 @@ import android.widget.PopupMenu;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-private Button button,clickyBtn;
+private Button button,clickyBtn,linkCollector;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,19 +18,24 @@ private Button button,clickyBtn;
         setContentView(R.layout.activity_main);
         button =findViewById(R.id.button);
         clickyBtn=findViewById(R.id.clicky);
-
+        linkCollector=findViewById(R.id.linkCollector);
     }
 
     public void onClick(View view)
     {
         switch (view.getId()) {
             case R.id.button:
-                Toast.makeText(MainActivity.this,
-                        "  Kartikey Dwivedi\n dwivedi.k@northeastern.edu",Toast.LENGTH_SHORT).show();
+                Intent intentAboutMe=new Intent(MainActivity.this,AboutMe.class);
+                startActivity(intentAboutMe);
                 break;
             case R.id.clicky:
                 Intent intent=new Intent(MainActivity.this,SecondActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.linkCollector:
+                Intent intentLink=new Intent(MainActivity.this,LinkCollector.class);
+                startActivity(intentLink);
+                break;
         }
 
     }
