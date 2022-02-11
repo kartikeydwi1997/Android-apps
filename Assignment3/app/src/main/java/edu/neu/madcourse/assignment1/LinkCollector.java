@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -38,8 +40,6 @@ public class LinkCollector extends AppCompatActivity implements Dialog.DialogLis
             @Override
             public void onClick(View v) {
                 openDialog();
-//                int pos = 0;
-//                addItem(pos);
             }
         });
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
@@ -53,7 +53,6 @@ public class LinkCollector extends AppCompatActivity implements Dialog.DialogLis
                 Snackbar.make(findViewById(R.id.myLayout), "Item Deleted Successfully!",
                         Snackbar.LENGTH_SHORT)
                         .show();
-//                Toast.makeText(LinkCollector.this, "Delete an item", Toast.LENGTH_SHORT).show();
                 int position = viewHolder.getLayoutPosition();
                 itemList.remove(position);
                 rviewAdapter.notifyItemRemoved(position);
@@ -134,20 +133,12 @@ public class LinkCollector extends AppCompatActivity implements Dialog.DialogLis
         rviewAdapter = new MyAdapter(itemList);
         ItemClickListener itemClickListener = new ItemClickListener() {
             @Override
-            public void onItemClick(int position) {
-                //attributions bond to the item has been changed
-                itemList.get(position).onItemClick(position);
-
-                rviewAdapter.notifyItemChanged(position);
+            public void onItemClick(String url) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                LinkCollector.this.startActivity(browserIntent);
             }
 
-//            @Override
-//            public void onCheckBoxClick(int position) {
-//                //attributions bond to the item has been changed
-//                itemList.get(position).onCheckBoxClick(position);
 //
-//                rviewAdapter.notifyItemChanged(position);
-//            }
         };
         rviewAdapter.setOnItemClickListener(itemClickListener);
 
@@ -161,12 +152,6 @@ public class LinkCollector extends AppCompatActivity implements Dialog.DialogLis
     Dialog dialog=new Dialog();
     dialog.show(getSupportFragmentManager(),"Dialog");
     }
-//    private void addItem(int position) {
-//        itemList.add(position, new ItemCard(R.drawable.empty, "No Logo item", "Item id: " + Math.abs(new Random().nextInt(100000))));
-//        Toast.makeText(LinkCollector.this, "Add an item", Toast.LENGTH_SHORT).show();
-//
-//        rviewAdapter.notifyItemInserted(position);
-//    }
 
     @Override
     public void applyTexts(String linkName, String url) {
