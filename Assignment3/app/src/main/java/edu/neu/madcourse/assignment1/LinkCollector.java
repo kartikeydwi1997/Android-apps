@@ -10,10 +10,13 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -25,7 +28,7 @@ public class LinkCollector extends AppCompatActivity implements Dialog.DialogLis
     private MyAdapter rviewAdapter;
     private RecyclerView.LayoutManager rLayoutManger;
     private FloatingActionButton floatingActionButton;
-
+    private TextView textView1;
     private static final String KEY_OF_INSTANCE = "KEY_OF_INSTANCE";
     private static final String NUMBER_OF_ITEMS = "NUMBER_OF_ITEMS";
 
@@ -33,8 +36,8 @@ public class LinkCollector extends AppCompatActivity implements Dialog.DialogLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_link_collector);
+        textView1=findViewById(R.id.noItemText);
         init(savedInstanceState);
-
         floatingActionButton = findViewById(R.id.floatingActionButton);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,7 +83,6 @@ public class LinkCollector extends AppCompatActivity implements Dialog.DialogLis
             // put itemDesc information into instance
             outState.putString(KEY_OF_INSTANCE + i + "2", itemList.get(i).getItemDesc());
             // put isChecked information into instance
-            //outState.putBoolean(KEY_OF_INSTANCE + i + "3", itemList.get(i).getStatus());
         }
         super.onSaveInstanceState(outState);
 
@@ -92,9 +94,9 @@ public class LinkCollector extends AppCompatActivity implements Dialog.DialogLis
     }
 
     private void initialItemData(Bundle savedInstanceState) {
-
         // Not the first time to open this Activity
         if (savedInstanceState != null && savedInstanceState.containsKey(NUMBER_OF_ITEMS)) {
+              textView1.setText("");
             if (itemList == null || itemList.size() == 0) {
 
                 int size = savedInstanceState.getInt(NUMBER_OF_ITEMS);
@@ -116,6 +118,11 @@ public class LinkCollector extends AppCompatActivity implements Dialog.DialogLis
                     itemList.add(itemCard);
                 }
             }
+        }else{
+//            Toast.makeText(this,"No Text",Toast.LENGTH_SHORT).show();
+
+
+           textView1.setText("No item found");
         }
 
 
@@ -155,7 +162,7 @@ public class LinkCollector extends AppCompatActivity implements Dialog.DialogLis
 
     @Override
     public void applyTexts(String linkName, String url) {
-        itemList.add(0, new ItemCard(R.drawable.empty, linkName, url));
+        itemList.add(0, new ItemCard(R.drawable.logo, linkName, url));
         Snackbar.make(findViewById(R.id.myLayout), "Item Added Successfully!",
                 Snackbar.LENGTH_SHORT)
                 .show();

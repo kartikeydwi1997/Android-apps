@@ -35,14 +35,16 @@
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/item_desc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/item_name"
-            android:layout_toEndOf="@+id/item_icon"
             android:layout_marginStart="10dp"
             android:layout_marginTop="5dp"
-            android:id="@+id/item_desc"
-            android:text="@string/url" />
+            android:layout_toEndOf="@+id/item_icon"
+            android:text="@string/url"
+            android:textColor="#CAE4F1"
+            android:textStyle="bold" />
 
 
 <!--        <CheckBox-->

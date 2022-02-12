@@ -34,7 +34,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
         holder.itemIcon.setImageResource(currentItem.getImageSource());
         holder.itemName.setText(currentItem.getItemName());
-        holder.itemDesc.setText(currentItem.getItemDesc());
+        holder.itemUrl.setText(currentItem.getItemDesc());
     }
 
     @Override
