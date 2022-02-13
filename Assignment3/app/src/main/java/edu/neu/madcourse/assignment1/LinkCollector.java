@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,12 +19,22 @@ import com.google.android.material.snackbar.Snackbar;
 
 import org.w3c.dom.Text;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class LinkCollector extends AppCompatActivity implements Dialog.DialogListener {
     private ArrayList<ItemCard> itemList = new ArrayList<>();;
-
+    private static final String FILE_NAME="A01.txt";
     private RecyclerView recyclerView;
     private MyAdapter rviewAdapter;
     private RecyclerView.LayoutManager rLayoutManger;
@@ -31,13 +42,50 @@ public class LinkCollector extends AppCompatActivity implements Dialog.DialogLis
     private TextView textView1;
     private static final String KEY_OF_INSTANCE = "KEY_OF_INSTANCE";
     private static final String NUMBER_OF_ITEMS = "NUMBER_OF_ITEMS";
-
+    String regex = "((http|https)://)(www.)?"
+            + "[a-zA-Z0-9@:%._\\+~#?&//=]"
+            + "{2,256}\\.[a-z]"
+            + "{2,6}\\b([-a-zA-Z0-9@:%"
+            + "._\\+~#?&//=]*)";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_link_collector);
+        FileInputStream fis=null;
+        try {
+            fis=openFileInput(FILE_NAME);
+            InputStreamReader isr=new InputStreamReader(fis);
+            BufferedReader br=new BufferedReader(isr);
+            String line = br.readLine();
+
+            while (line != null) {
+                Log.i("List loaded", line);
+                String[] lineSplit = line.split("---");
+                Log.i("Debug", "" + lineSplit.length);
+                itemList.add(0, new ItemCard(R.drawable.logo, lineSplit[0], lineSplit[1]));
+                line = br.readLine();
+            }
+
+            br.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally {
+            if(fis!=null){
+                try {
+                    fis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
         textView1=findViewById(R.id.noItemText);
         init(savedInstanceState);
+        if(itemList.size()!=0) {
+            textView1.setCompoundDrawablesWithIntrinsicBounds(0,0, 0, 0);
+            textView1.setText("");
+        }
         floatingActionButton = findViewById(R.id.floatingActionButton);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,13 +105,83 @@ public class LinkCollector extends AppCompatActivity implements Dialog.DialogLis
                         Snackbar.LENGTH_SHORT)
                         .show();
                 int position = viewHolder.getLayoutPosition();
+                Log.i("Position", String.valueOf(position));
                 itemList.remove(position);
                 if (itemList.size()==0){
                     textView1.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_baseline_search_24, 0, 0);
                     textView1.setText("No item found");
                 }
                 rviewAdapter.notifyItemRemoved(position);
+                FileInputStream fis=null;
+                List<ArrayList<String>> listOfLists = new ArrayList<ArrayList<String>>();
 
+                int count=0;
+                try {
+                    fis=openFileInput(FILE_NAME);
+                    InputStreamReader isr=new InputStreamReader(fis);
+                    BufferedReader br=new BufferedReader(isr);
+                    String line = br.readLine();
+
+                    while (line != null) {
+                        Log.i("List loaded", line);
+                        ArrayList<String> list1 = new ArrayList<String>();
+                        String[] lineSplit = line.split("---");
+                        if(count!=position) {
+                            list1.add(lineSplit[0]);
+                            list1.add(lineSplit[1]);
+                            listOfLists.add(list1);
+                        }
+                        count+=1;
+
+                        line = br.readLine();
+
+                    }
+
+                    br.close();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }finally {
+                    if(fis!=null){
+                        try {
+                            fis.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+                Log.i("List after deleted items", listOfLists.toString());
+
+                //List is deleted
+              File file= new File(getFilesDir(),FILE_NAME);
+              if(file.exists()){
+                  deleteFile(FILE_NAME);
+              }
+
+              //Form new list in localstorage
+
+                listOfLists.forEach((list)  ->
+                {
+                    FileOutputStream fos=null;//close this fileoutput
+                    String store = list.get(0).toString() + "---" + list.get(1).toString();
+                    try {
+                        fos = openFileOutput(FILE_NAME, MODE_APPEND);
+                        fos.write((store + "\n").getBytes());
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } finally {
+                        if (fos != null) {
+                            try {
+                                fos.close();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                });
             }
         });
         itemTouchHelper.attachToRecyclerView(recyclerView);
@@ -121,6 +239,22 @@ public class LinkCollector extends AppCompatActivity implements Dialog.DialogLis
         ItemClickListener itemClickListener = new ItemClickListener() {
             @Override
             public void onItemClick(String url) {
+                Pattern p = Pattern.compile(regex);
+
+                //https://www.geeksforgeeks.org/check-if-an-url-is-valid-or-not-using-regular-expression/
+                if (url == null) {
+                    Snackbar.make(findViewById(R.id.myLayout), "Invalid Url ",
+                            Snackbar.LENGTH_SHORT)
+                            .show();
+                    return;
+                }
+                Matcher m = p.matcher(url);
+                if(!m.matches()){
+                    Snackbar.make(findViewById(R.id.myLayout), "Invalid Url ",
+                            Snackbar.LENGTH_SHORT)
+                            .show();
+                    return;
+                }
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
                 LinkCollector.this.startActivity(browserIntent);
             }
@@ -140,6 +274,24 @@ public class LinkCollector extends AppCompatActivity implements Dialog.DialogLis
         textView1.setText("");
         textView1.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
         itemList.add(0, new ItemCard(R.drawable.logo, linkName, url));
+        FileOutputStream fos=null;//close this fileoutput
+        String store = linkName + "---" + url;
+        try {
+            fos=openFileOutput(FILE_NAME, MODE_APPEND);
+            fos.write((store + "\n").getBytes());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally {
+            if(fos!=null){
+                try {
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
         Snackbar.make(findViewById(R.id.myLayout), "Item Added Successfully!",
                 Snackbar.LENGTH_SHORT)
                 .show();

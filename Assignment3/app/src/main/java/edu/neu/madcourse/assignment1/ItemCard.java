@@ -14,7 +14,7 @@ public class ItemCard {
         this.itemUrl = itemUrl;
     }
 
-    //Getters for the imageSource, itemName and itemDesc
+    //Getters for the imageSource, getItemShortName and getItemUrl
     public int getImageSource() {
         return imageSource;
     }
