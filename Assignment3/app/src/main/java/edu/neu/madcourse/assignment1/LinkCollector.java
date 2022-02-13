@@ -58,6 +58,10 @@ public class LinkCollector extends AppCompatActivity implements Dialog.DialogLis
                         .show();
                 int position = viewHolder.getLayoutPosition();
                 itemList.remove(position);
+                if (itemList.size()==0){
+                    textView1.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_baseline_search_24, 0, 0);
+                    textView1.setText("No item found");
+                }
                 rviewAdapter.notifyItemRemoved(position);
 
             }
@@ -73,16 +77,10 @@ public class LinkCollector extends AppCompatActivity implements Dialog.DialogLis
         int size = itemList == null ? 0 : itemList.size();
         outState.putInt(NUMBER_OF_ITEMS, size);
 
-        // Need to generate unique key for each item
-        // This is only a possible way to do, please find your own way to generate the key
         for (int i = 0; i < size; i++) {
-            // put image information id into instance
             outState.putInt(KEY_OF_INSTANCE + i + "0", itemList.get(i).getImageSource());
-            // put itemName information into instance
-            outState.putString(KEY_OF_INSTANCE + i + "1", itemList.get(i).getItemName());
-            // put itemDesc information into instance
-            outState.putString(KEY_OF_INSTANCE + i + "2", itemList.get(i).getItemDesc());
-            // put isChecked information into instance
+            outState.putString(KEY_OF_INSTANCE + i + "1", itemList.get(i).getItemShortName());
+            outState.putString(KEY_OF_INSTANCE + i + "2", itemList.get(i).getItemUrl());
         }
         super.onSaveInstanceState(outState);
 
@@ -94,49 +92,31 @@ public class LinkCollector extends AppCompatActivity implements Dialog.DialogLis
     }
 
     private void initialItemData(Bundle savedInstanceState) {
-        // Not the first time to open this Activity
+
         if (savedInstanceState != null && savedInstanceState.containsKey(NUMBER_OF_ITEMS)) {
-              textView1.setText("");
+
             if (itemList == null || itemList.size() == 0) {
 
                 int size = savedInstanceState.getInt(NUMBER_OF_ITEMS);
 
-                // Retrieve keys we stored in the instance
                 for (int i = 0; i < size; i++) {
                     Integer imgId = savedInstanceState.getInt(KEY_OF_INSTANCE + i + "0");
                     String itemName = savedInstanceState.getString(KEY_OF_INSTANCE + i + "1");
                     String itemDesc = savedInstanceState.getString(KEY_OF_INSTANCE + i + "2");
-//                    boolean isChecked = savedInstanceState.getBoolean(KEY_OF_INSTANCE + i + "3");
-
-                    // We need to make sure names such as "XXX(checked)" will not duplicate
-                    // Use a tricky way to solve this problem, not the best though
-//                    if (isChecked) {
-//                        itemName = itemName.substring(0, itemName.lastIndexOf("("));
-//                    }
                     ItemCard itemCard = new ItemCard(imgId, itemName, itemDesc);
 
                     itemList.add(itemCard);
                 }
             }
         }else{
-//            Toast.makeText(this,"No Text",Toast.LENGTH_SHORT).show();
-
-
            textView1.setText("No item found");
         }
-
-
-
     }
 
     private void createRecyclerView() {
-
-
         rLayoutManger = new LinearLayoutManager(this);
-
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
-
         rviewAdapter = new MyAdapter(itemList);
         ItemClickListener itemClickListener = new ItemClickListener() {
             @Override
@@ -144,15 +124,10 @@ public class LinkCollector extends AppCompatActivity implements Dialog.DialogLis
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
                 LinkCollector.this.startActivity(browserIntent);
             }
-
-//
         };
         rviewAdapter.setOnItemClickListener(itemClickListener);
-
         recyclerView.setAdapter(rviewAdapter);
         recyclerView.setLayoutManager(rLayoutManger);
-
-
     }
 
     public void openDialog(){
@@ -162,6 +137,8 @@ public class LinkCollector extends AppCompatActivity implements Dialog.DialogLis
 
     @Override
     public void applyTexts(String linkName, String url) {
+        textView1.setText("");
+        textView1.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
         itemList.add(0, new ItemCard(R.drawable.logo, linkName, url));
         Snackbar.make(findViewById(R.id.myLayout), "Item Added Successfully!",
                 Snackbar.LENGTH_SHORT)

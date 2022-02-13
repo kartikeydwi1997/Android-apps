@@ -36,14 +36,16 @@
         android:id="@+id/noItemText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+
         android:fontFamily="sans-serif-condensed"
-        android:drawableTop="@drawable/ic_baseline_search_24"
-        android:text="No item"
+        android:text=" "
         android:textColor="#B1AFAF"
         android:textSize="16sp"
         android:textStyle="bold"
+        android:drawableTop="@drawable/ic_baseline_search_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

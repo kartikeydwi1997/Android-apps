@@ -8,14 +8,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class MyViewHolder extends RecyclerView.ViewHolder {
     public ImageView itemIcon;
-    public TextView itemName;
+    public TextView itemShortName;
     public TextView itemUrl;
 
     public MyViewHolder(View itemView, final ItemClickListener listener) {
         super(itemView);
         itemIcon = itemView.findViewById(R.id.item_icon);
-        itemName = itemView.findViewById(R.id.item_name);
-        itemUrl = itemView.findViewById(R.id.item_desc);
+        itemShortName = itemView.findViewById(R.id.item_shortName);
+        itemUrl = itemView.findViewById(R.id.item_url);
 
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override

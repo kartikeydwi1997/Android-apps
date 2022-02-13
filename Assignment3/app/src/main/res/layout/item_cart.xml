@@ -23,7 +23,7 @@
             android:padding="3dp" />
 
         <TextView
-            android:id="@+id/item_name"
+            android:id="@+id/item_shortName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -35,25 +35,16 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/item_desc"
+            android:id="@+id/item_url"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/item_name"
+            android:layout_below="@+id/item_shortName"
             android:layout_marginStart="10dp"
             android:layout_marginTop="5dp"
             android:layout_toEndOf="@+id/item_icon"
             android:text="@string/url"
             android:textColor="#CAE4F1"
             android:textStyle="bold" />
-
-
-<!--        <CheckBox-->
-<!--            android:id="@+id/checkbox"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginStart="90dp"-->
-<!--            android:layout_marginTop="13dp"-->
-<!--            android:layout_toEndOf="@+id/item_desc" />-->
 
     </RelativeLayout>
 

@@ -30,11 +30,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        ItemCard currentItem = itemList.get(position);
-
-        holder.itemIcon.setImageResource(currentItem.getImageSource());
-        holder.itemName.setText(currentItem.getItemName());
-        holder.itemUrl.setText(currentItem.getItemDesc());
+        ItemCard item = itemList.get(position);
+        holder.itemIcon.setImageResource(item.getImageSource());
+        holder.itemShortName.setText(item.getItemShortName());
+        holder.itemUrl.setText(item.getItemUrl());
     }
 
     @Override

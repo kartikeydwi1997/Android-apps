@@ -3,15 +3,15 @@ package edu.neu.madcourse.assignment1;
 public class ItemCard {
 
     private final int imageSource;
-    private final String itemName;
-    private final String itemDesc;
+    private final String itemShortName;
+    private final String itemUrl;
 
 
     //Constructor
-    public ItemCard(int imageSource, String itemName, String itemDesc) {
+    public ItemCard(int imageSource, String itemShortName, String itemUrl) {
         this.imageSource = imageSource;
-        this.itemName = itemName;
-        this.itemDesc = itemDesc;
+        this.itemShortName = itemShortName;
+        this.itemUrl = itemUrl;
     }
 
     //Getters for the imageSource, itemName and itemDesc
@@ -19,12 +19,12 @@ public class ItemCard {
         return imageSource;
     }
 
-    public String getItemDesc() {
-        return itemDesc;
+    public String getItemUrl() {
+        return itemUrl;
     }
 
-    public String getItemName() {
-        return itemName ;
+    public String getItemShortName() {
+        return itemShortName ;
     }
 
 
