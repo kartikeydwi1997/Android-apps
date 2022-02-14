@@ -6,16 +6,27 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
+import com.google.android.material.snackbar.Snackbar;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Dialog extends AppCompatDialogFragment {
 private EditText linkName;
 private EditText linkURL;
 private DialogListener listener;
+    String regex = "((http|https)://)(www.)?"
+            + "[a-zA-Z0-9@:%._\\+~#?&//=]"
+            + "{2,256}\\.[a-z]"
+            + "{2,6}\\b([-a-zA-Z0-9@:%"
+            + "._\\+~#?&//=]*)";
     @NonNull
     @Override
     public android.app.Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
@@ -29,15 +40,18 @@ private DialogListener listener;
 
             }
         }).setPositiveButton("Add", new DialogInterface.OnClickListener() {
+
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 String shortName=linkName.getText().toString();
                 String url=linkURL.getText().toString();
+
                 listener.applyTexts(shortName,url);
             }
         });
         linkName=view.findViewById(R.id.editTextLinkName);
         linkURL=view.findViewById(R.id.editTextURL);
+
         return builder.create();
     }
 

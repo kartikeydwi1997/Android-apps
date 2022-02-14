@@ -59,9 +59,7 @@ public class LinkCollector extends AppCompatActivity implements Dialog.DialogLis
             String line = br.readLine();
 
             while (line != null) {
-                Log.i("List loaded", line);
                 String[] lineSplit = line.split("---");
-                Log.i("Debug", "" + lineSplit.length);
                 itemList.add(0, new ItemCard(R.drawable.logo, lineSplit[0], lineSplit[1]));
                 line = br.readLine();
             }
@@ -105,13 +103,7 @@ public class LinkCollector extends AppCompatActivity implements Dialog.DialogLis
                         Snackbar.LENGTH_SHORT)
                         .show();
                 int position = viewHolder.getLayoutPosition();
-                Log.i("Position", String.valueOf(position));
-                itemList.remove(position);
-                if (itemList.size()==0){
-                    textView1.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_baseline_search_24, 0, 0);
-                    textView1.setText("No item found");
-                }
-                rviewAdapter.notifyItemRemoved(position);
+
                 FileInputStream fis=null;
                 List<ArrayList<String>> listOfLists = new ArrayList<ArrayList<String>>();
 
@@ -123,10 +115,9 @@ public class LinkCollector extends AppCompatActivity implements Dialog.DialogLis
                     String line = br.readLine();
 
                     while (line != null) {
-                        Log.i("List loaded", line);
                         ArrayList<String> list1 = new ArrayList<String>();
                         String[] lineSplit = line.split("---");
-                        if(count!=position) {
+                        if(count!=(itemList.size()-(position+1))) {
                             list1.add(lineSplit[0]);
                             list1.add(lineSplit[1]);
                             listOfLists.add(list1);
@@ -151,7 +142,6 @@ public class LinkCollector extends AppCompatActivity implements Dialog.DialogLis
                         }
                     }
                 }
-                Log.i("List after deleted items", listOfLists.toString());
 
                 //List is deleted
               File file= new File(getFilesDir(),FILE_NAME);
@@ -182,8 +172,15 @@ public class LinkCollector extends AppCompatActivity implements Dialog.DialogLis
                         }
                     }
                 });
+                itemList.remove(position);
+                if (itemList.size()==0){
+                    textView1.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_baseline_search_24, 0, 0);
+                    textView1.setText("No item found");
+                }
+                rviewAdapter.notifyItemRemoved(position);
             }
         });
+
         itemTouchHelper.attachToRecyclerView(recyclerView);
     }
 
@@ -272,10 +269,28 @@ public class LinkCollector extends AppCompatActivity implements Dialog.DialogLis
     @Override
     public void applyTexts(String linkName, String url) {
         textView1.setText("");
+        Pattern p = Pattern.compile(regex);
+
+        //https://www.geeksforgeeks.org/check-if-an-url-is-valid-or-not-using-regular-expression/
+        if (url.toString() == null) {
+            Snackbar.make(findViewById(R.id.myLayout), "Invalid Url",
+                    Snackbar.LENGTH_SHORT)
+                    .show();
+            return;
+        }
+        Matcher m = p.matcher(url.toString() );
+        if(!m.matches()){
+            Snackbar.make(findViewById(R.id.myLayout), "Invalid Url",
+                    Snackbar.LENGTH_SHORT)
+                    .show();
+            return;
+        }
+
         textView1.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
         itemList.add(0, new ItemCard(R.drawable.logo, linkName, url));
         FileOutputStream fos=null;//close this fileoutput
         String store = linkName + "---" + url;
+
         try {
             fos=openFileOutput(FILE_NAME, MODE_APPEND);
             fos.write((store + "\n").getBytes());
