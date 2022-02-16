@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Assignment3</string>
+    <string name="title_activity_about_me">AboutMe</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="user_name">Kartikey Dwivedi</string>
+    <string name="user_email">Dwivedi.k@northeastern.edu</string>
+    <string name="short_name">Short Name</string>
+    <string name="url">Url</string>
+
+</resources>
