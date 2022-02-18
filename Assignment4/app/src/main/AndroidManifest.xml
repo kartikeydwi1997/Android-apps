@@ -3,8 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="edu.neu.madcourse.assignment1">
 
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher_a3"
@@ -12,6 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_a3_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Assignment1">
+        <activity
+            android:name=".Location"
+            android:exported="false" />
         <activity
             android:name=".MyLocation"
             android:exported="false" />

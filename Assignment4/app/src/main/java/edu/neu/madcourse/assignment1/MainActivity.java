@@ -38,10 +38,11 @@ private Button button,clickyBtn,linkCollector,location;
                 break;
 
             case R.id.mylocation:
-                Intent intentLocation=new Intent(MainActivity.this,MyLocation.class);
+                Intent intentLocation=new Intent(MainActivity.this,Location.class);
                 startActivity(intentLocation);
                 break;
         }
+
 
     }
 }

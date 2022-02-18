@@ -12,6 +12,7 @@
         <entry key="app/src/main/res/drawable/logo.xml" value="0.25833333333333336" />
         <entry key="app/src/main/res/layout/activity_about_me.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_link_collector.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_location.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_my_location.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_second.xml" value="0.25" />
