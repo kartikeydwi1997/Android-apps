@@ -17,9 +17,6 @@
             android:name=".Location"
             android:exported="false" />
         <activity
-            android:name=".MyLocation"
-            android:exported="false" />
-        <activity
             android:name=".LinkCollector"
             android:exported="false" />
         <activity
