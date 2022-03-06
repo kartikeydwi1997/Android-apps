@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Assignment4</string>
+    <string name="app_name">Assignment6</string>
     <string name="title_activity_about_me">AboutMe</string>
     <!-- Strings used for fragments for navigation -->
     <string name="next">Next</string>
@@ -8,5 +8,9 @@
     <string name="user_email">Dwivedi.k@northeastern.edu</string>
     <string name="short_name">Short Name</string>
     <string name="url">Url</string>
-
+    <string-array name="dropdownReddit">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
 </resources>

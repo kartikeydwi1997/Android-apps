@@ -92,7 +92,7 @@
                                               <map>
                                                 <entry key="color" value="000505" />
                                                 <entry key="fontFamily" value=".SF NS" />
-                                                <entry key="text" value="A4" />
+                                                <entry key="text" value="A6" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -105,7 +105,7 @@
                                               <map>
                                                 <entry key="color" value="000505" />
                                                 <entry key="fontFamily" value=".SF NS" />
-                                                <entry key="text" value="A4" />
+                                                <entry key="text" value="A6" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -116,9 +116,9 @@
                                   <option name="values">
                                     <map>
                                       <entry key="backgroundAssetType" value="COLOR" />
-                                      <entry key="backgroundColor" value="03d5d9" />
+                                      <entry key="backgroundColor" value="dc3d3d" />
                                       <entry key="foregroundAssetType" value="TEXT" />
-                                      <entry key="outputName" value="ic_launcher_a4" />
+                                      <entry key="outputName" value="ic_launcher_a6" />
                                     </map>
                                   </option>
                                 </PersistentState>

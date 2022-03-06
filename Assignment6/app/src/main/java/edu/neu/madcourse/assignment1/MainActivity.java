@@ -10,7 +10,7 @@ import android.widget.PopupMenu;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-private Button button,clickyBtn,linkCollector,location;
+private Button button,clickyBtn,linkCollector,location,memeBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +19,7 @@ private Button button,clickyBtn,linkCollector,location;
         button =findViewById(R.id.button);
         clickyBtn=findViewById(R.id.clicky);
         linkCollector=findViewById(R.id.linkCollector);
+        memeBtn=findViewById(R.id.meme);
     }
 
     public void onClick(View view)
@@ -40,6 +41,10 @@ private Button button,clickyBtn,linkCollector,location;
             case R.id.mylocation:
                 Intent intentLocation=new Intent(MainActivity.this,Location.class);
                 startActivity(intentLocation);
+                break;
+            case R.id.meme:
+                Intent intentMeme=new Intent(MainActivity.this,Meme.class);
+                startActivity(intentMeme);
                 break;
         }
 

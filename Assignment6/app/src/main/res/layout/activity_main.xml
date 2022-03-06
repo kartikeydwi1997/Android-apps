@@ -15,9 +15,9 @@
         android:fontFamily="sans-serif-black"
         android:text="Hello World!"
         app:layout_constraintBottom_toTopOf="@+id/button"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/button"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/button"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
@@ -27,10 +27,11 @@
         android:onClick="onClick"
         android:text="About Me"
         app:layout_constraintBottom_toTopOf="@+id/clicky"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/clicky"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/clicky"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
 
     <Button
         android:id="@+id/clicky"
@@ -39,9 +40,9 @@
         android:onClick="onClick"
         android:text="Clicky Clicky"
         app:layout_constraintBottom_toTopOf="@+id/linkCollector"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/linkCollector"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/linkCollector"
         app:layout_constraintTop_toBottomOf="@+id/button" />
 
     <Button
@@ -51,9 +52,9 @@
         android:onClick="onClick"
         android:text="Link Collector"
         app:layout_constraintBottom_toTopOf="@+id/mylocation"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/mylocation"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/mylocation"
         app:layout_constraintTop_toBottomOf="@+id/clicky" />
 
     <Button
@@ -62,9 +63,21 @@
         android:layout_height="wrap_content"
         android:onClick="onClick"
         android:text="My Location"
+        app:layout_constraintBottom_toTopOf="@+id/meme"
+        app:layout_constraintEnd_toEndOf="@+id/meme"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/meme"
+        app:layout_constraintTop_toBottomOf="@+id/linkCollector" />
+
+    <Button
+        android:id="@+id/meme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onClick"
+        android:text="REDDIT MEME"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linkCollector" />
+        app:layout_constraintTop_toBottomOf="@+id/mylocation" />
 </androidx.constraintlayout.widget.ConstraintLayout>

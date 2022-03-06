@@ -2,17 +2,26 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="edu.neu.madcourse.assignment1">
-
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="28"/>
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
+<!--    android:requestLegacyExternalStorage="true"-->
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher_a4"
+        android:icon="@mipmap/ic_launcher_a6"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_a4_round"
+
+        android:roundIcon="@mipmap/ic_launcher_a6_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Assignment1">
+        <activity
+            android:name=".Meme"
+            android:exported="false" />
         <activity
             android:name=".Location"
             android:exported="false" />
