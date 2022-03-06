@@ -192,8 +192,9 @@ public class Meme extends AppCompatActivity {
                                 listdata.add(mQuestion);
                             }
                             savedUrl = listdata.get(0).toString();
-                            progressBar.setVisibility(View.INVISIBLE);
+
                             Glide.with(Meme.this).load(listdata.get(0)).into(memeImage);
+                            progressBar.setVisibility(View.INVISIBLE);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
