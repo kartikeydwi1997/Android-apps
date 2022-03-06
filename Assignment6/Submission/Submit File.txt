@@ -2,4 +2,4 @@ NAME: KARTIKEY DWIVEDI
 
 GITHUB NAME: kartikey
 
-LINK TO GIT REPO: https://github.ccs.neu.edu/kartikey/NUMAD22Sp_KartikeyDwivedi/tree/master/Assignment4
+LINK TO GIT REPO: https://github.ccs.neu.edu/kartikey/NUMAD22Sp_KartikeyDwivedi/tree/master/Assignment6
